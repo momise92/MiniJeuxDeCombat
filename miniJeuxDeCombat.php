@@ -16,9 +16,14 @@ class Personnage
     $_degats,
     $_nom;
 
-    const CEST_MOI = 1;
-    const PERSONNAGE_TUE = 2;
-    const PERSONNAGE_FRAPPE = 3;
+    const CEST_MOI = 1; // Constante renvoyée par la méthode `frapper` si on se frappe soi-même.
+    const PERSONNAGE_TUE = 2; // Constante renvoyée par la méthode `frapper` si on a tué le personnage en le frappant.
+    const PERSONNAGE_FRAPPE = 3; // Constante renvoyée par la méthode `frapper` si on a bien frappé le personnage.
+
+    public function __construct(array $donnees)
+    {
+        $this->hydrate($donnees);
+    }
 
     public function frapper(Personnage $perso)
     {
@@ -34,6 +39,17 @@ class Personnage
         // Si on a 100 de dégâts ou plus, la méthode renverra une valeur signifiant que le personnage a été tué.
         
         // Sinon, elle renverra une valeur signifiant que le personnage a bien été frappé.
+    }
+
+    public function hydrate(array $donnees)
+    {
+        foreach ($donnees as $key => $value) {
+            $method = 'set'.ucfirst($key);
+
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
     }
 
     public function degats()
