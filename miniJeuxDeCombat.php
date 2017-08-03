@@ -40,7 +40,7 @@ class Personnage
         
         // Sinon, elle renverra une valeur signifiant que le personnage a bien été frappé.
     }
-
+    
     public function hydrate(array $donnees)
     {
         foreach ($donnees as $key => $value) {
@@ -70,7 +70,7 @@ class Personnage
     public function setDegats($degats)
     {
         $degats = (int) $degats;
-    
+
         if ($degats >= 0 && $degats <= 100) {
             $this->_degats = $degats;
         }
@@ -79,7 +79,7 @@ class Personnage
     public function setId($id)
     {
         $id = (int) $id;
-    
+
         if ($id > 0) {
             $this->_id = $id;
         }
